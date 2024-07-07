@@ -1,5 +1,37 @@
 <?php 
 
+
+
+// $servername = "localhost";
+// $username = "username";
+// $password = "password";
+// $dbname = "database_name";
+
+// $conn = new mysqli($servername, $username, $password, $dbname);
+
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
+
+// $query = isset($_GET['q']) ? $_GET['q'] : '';
+
+// $sql = $conn->prepare("SELECT * FROM properties WHERE title LIKE ? OR description LIKE ?");
+// $searchTerm = "%$query%";
+// $sql->bind_param("ss", $searchTerm, $searchTerm);
+// $sql->execute();
+// $result = $sql->get_result();
+
+// $properties = [];
+// if ($result->num_rows > 0) {
+//     while($row = $result->fetch_assoc()) {
+//         $properties[] = $row;
+//     }
+// }
+
+// $conn->close();
+
+// header('Content-Type: application/json');
+// echo json_encode($properties);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +64,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
         }
+
+     
         .header h1 {
             font-size: 3em;
         }
@@ -130,12 +165,40 @@
     </nav>
 
     <!-- Header Section -->
-    <header class="header">
+    <!-- <header class="header d-flex">
         <div>
             <h1 style="color: #0a0a0a;" class="oxygen-bold">Welcome to CARIKOST</h1>
             <p class="oxygen-semibold" style="color: #1D1A1A;">Your dream home awaits</p>
             <a href="#properties" class="btn btn-primary open-sans-semibold">View Properties</a>
         </div>
+         <div class="container my-5">
+        <h2>Search Properties</h2>
+        <input type="text" id="search-input" class="form-control" placeholder="Search for properties...">
+        <div id="property-list" class="row mt-3">
+            Search results will be appended here
+        </div>
+    </div>
+    </header> -->
+
+    <header class="header d-flex justify-content-between align-items-center">
+        <div>
+            <h1 style="color: #0a0a0a;" class="oxygen-bold">Welcome to CARIKOST</h1>
+            <p class="oxygen-semibold" style="color: #1D1A1A;">Your dream home awaits</p>
+      
+                <input type="text" id="search-input" class="form-control mt-5" placeholder="Search for properties...">
+            <div id="property-list" class="row mt-3">
+                <!-- Search results will be appended here -->
+            </div>
+              <p class="oxygen-semibold" style="color: #1D1A1A;">or</p>
+                  <a href="#properties" class="btn btn-primary open-sans-semibold">View Properties</a>
+        </div>
+        <!-- <div class="container my-1">
+            <h2>Search Properties</h2>
+            <input type="text" id="search-input" class="form-control" placeholder="Search for properties...">
+            <div id="property-list" class="row mt-3">
+                Search results will be appended here
+            </div>
+        </div> -->
     </header>
 
     <!-- About Us Section -->
@@ -210,22 +273,65 @@
         </div>
     </section>
 
-       <!-- Sign In Modal -->
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Contact Info -->
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>123 Property St, Suite 100<br>City, State 12345</p>
+                    <p>Email: info@propertyagent.com<br>Phone: (123) 456-7890</p>
+                </div>
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Social Media -->
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled d-flex">
+                        <li><a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" class="me-3"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" class="me-3"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p>&copy; 2024 CARIKOST. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+  
+    <!-- Sign In Modal -->
     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <h5  id="signInModalLabel" class="modal-title oxygen-semibold" style="color: #0a0a0a;">Sign In</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="signInEmail" class="form-label">Email address</label>
+                            <label for="signInEmail" class="form-label open-sans-semibold" style="color: #0a0a0a;">Email address</label>
                             <input type="email" class="form-control" id="signInEmail" required>
                         </div>
                         <div class="mb-3">
-                            <label for="signInPassword" class="form-label">Password</label>
+                            <label for="signInPassword" class="form-label open-sans-semibold" style="color: #0a0a0a;">Password</label>
                             <input type="password" class="form-control" id="signInPassword" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Sign In</button>
@@ -236,25 +342,31 @@
     </div>
 
     <!-- Sign Up Modal -->
-    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+
+
+       <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                    <h5 class="modal-title oxygen-bold" id="signUpModalLabel" style="color: #0a0a0a;">Sign Up</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="signUpName" class="form-label">Name</label>
+                            <label for="signUpName" class="form-label open-sans-semibold" style="color: #0a0a0a;">Full name</label>
                             <input type="text" class="form-control" id="signUpName" required>
                         </div>
+                         <div class="mb-3">
+                            <label for="signUpPhone" class="form-label open-sans-semibold" style="color: #0a0a0a;">Phone Number</label>
+                            <input type="email" class="form-control" id="signUpPhone" required>
+                        </div>
                         <div class="mb-3">
-                            <label for="signUpEmail" class="form-label">Email address</label>
+                            <label for="signUpEmail" class="form-label open-sans-semibold" style="color: #0a0a0a;">Email address</label>
                             <input type="email" class="form-control" id="signUpEmail" required>
                         </div>
                         <div class="mb-3">
-                            <label for="signUpPassword" class="form-label">Password</label>
+                            <label for="signUpPassword" class="form-label open-sans-semibold" style="color: #0a0a0a;">Password</label>
                             <input type="password" class="form-control" id="signUpPassword" required>
                         </div>
                         <button type="submit" class="btn btn-primary oxygen-semibold" >Sign Up</button>
@@ -262,60 +374,40 @@
                 </div>
             </div>
         </div>
-    </div>   <!-- Sign In Modal -->
-    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="signInEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signInEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signInPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign In</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>   
 
-    <!-- Sign Up Modal -->
-    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="signUpName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="signUpName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signUpEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signUpPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script>
+        document.getElementById('search-input').addEventListener('input', function() {
+            const query = this.value;
+            if (query.length >= 2) {
+                fetch(`search_properties.php?q=${query}`)
+                    .then(response => response.json())
+                    .then(properties => {
+                        const propertyList = document.getElementById('property-list');
+                        propertyList.innerHTML = '';
+                        properties.forEach(property => {
+                            const propertyCard = document.createElement('div');
+                            propertyCard.classList.add('col-md-4', 'property-card');
+                            propertyCard.innerHTML = `
+                                <div class="card">
+                                    <img src="${property.image}" class="card-img-top" alt="${property.title}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${property.title}</h5>
+                                        <p class="card-text">${property.description}</p>
+                                        <p class="card-text"><strong>$${property.price}</strong></p>
+                                    </div>
+                                </div>
+                            `;
+                            propertyList.appendChild(propertyCard);
+                        });
+                    });
+            } else {
+                document.getElementById('property-list').innerHTML = '';
+            }
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 </html>
