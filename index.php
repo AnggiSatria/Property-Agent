@@ -2,36 +2,7 @@
 
 
 
-// $servername = "localhost";
-// $username = "username";
-// $password = "password";
-// $dbname = "database_name";
 
-// $conn = new mysqli($servername, $username, $password, $dbname);
-
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
-
-// $query = isset($_GET['q']) ? $_GET['q'] : '';
-
-// $sql = $conn->prepare("SELECT * FROM properties WHERE title LIKE ? OR description LIKE ?");
-// $searchTerm = "%$query%";
-// $sql->bind_param("ss", $searchTerm, $searchTerm);
-// $sql->execute();
-// $result = $sql->get_result();
-
-// $properties = [];
-// if ($result->num_rows > 0) {
-//     while($row = $result->fetch_assoc()) {
-//         $properties[] = $row;
-//     }
-// }
-
-// $conn->close();
-
-// header('Content-Type: application/json');
-// echo json_encode($properties);
 ?>
 
 <!DOCTYPE html>
@@ -325,14 +296,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="./home/index.php" method="post">
                         <div class="mb-3">
                             <label for="signInEmail" class="form-label open-sans-semibold" style="color: #0a0a0a;">Email address</label>
-                            <input type="email" class="form-control" id="signInEmail" required>
+                            <input type="email" class="form-control" id="signInEmail" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="signInPassword" class="form-label open-sans-semibold" style="color: #0a0a0a;">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" required>
+                            <input type="password" class="form-control" id="signInPassword" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Sign In</button>
                     </form>
@@ -352,22 +323,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="./home/index.php" method="post">
                         <div class="mb-3">
                             <label for="signUpName" class="form-label open-sans-semibold" style="color: #0a0a0a;">Full name</label>
-                            <input type="text" class="form-control" id="signUpName" required>
+                            <input type="text" class="form-control" id="signUpName" name="fname" required>
                         </div>
                          <div class="mb-3">
                             <label for="signUpPhone" class="form-label open-sans-semibold" style="color: #0a0a0a;">Phone Number</label>
-                            <input type="email" class="form-control" id="signUpPhone" required>
+                            <input type="text" class="form-control" id="signUpPhone" name="phone" required>
                         </div>
                         <div class="mb-3">
                             <label for="signUpEmail" class="form-label open-sans-semibold" style="color: #0a0a0a;">Email address</label>
-                            <input type="email" class="form-control" id="signUpEmail" required>
+                            <input type="email" class="form-control" id="signUpEmail" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="signUpPassword" class="form-label open-sans-semibold" style="color: #0a0a0a;">Password</label>
-                            <input type="password" class="form-control" id="signUpPassword" required>
+                            <input type="password" class="form-control" id="signUpPassword" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary oxygen-semibold" >Sign Up</button>
                     </form>
