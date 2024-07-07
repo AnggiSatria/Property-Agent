@@ -25,6 +25,11 @@
 // }
 
 // $conn->close();
+
+if (isset($_POST["fname"]) == "") {
+  header("Location: /");
+} 
+
 ?>
 
 <!DOCTYPE html>
