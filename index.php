@@ -1,5 +1,35 @@
 <?php 
 
+include("./server/database/users.php");
+
+
+if (isset($_POST["submit"])) {
+    if (registerUser($_POST) > 0) {
+       echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registers Success',
+                text: 'Registers Successfully'
+            }).then(function() {
+                window.location = './home/index.php';
+            });
+        </script>";
+    exit();
+    }else{
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Registers failed'
+            }).then(function() {
+                window.location = 'index.php';
+            });
+        </script>";
+    }
+};
+
 // Check if login
 
 
@@ -23,7 +53,6 @@
 // $full_name ->  
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +68,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="sweetalert2.min.css">
     <title>CARIKOST.COM</title>
      <style>
         body {
@@ -122,6 +152,58 @@
           font-variation-settings:
             "wdth" 100;
         }
+
+      /* Bootstrap 5 CSS and icons included */
+            :root {
+            --colorPrimaryNormal: #00b3bb;
+            --colorPrimaryDark: #00979f;
+            --colorPrimaryGlare: #00cdd7;
+            --colorPrimaryHalf: #80d9dd;
+            --colorPrimaryQuarter: #bfecee;
+            --colorPrimaryEighth: #dff5f7;
+            --colorPrimaryPale: #f3f5f7;
+            --colorPrimarySeparator: #f3f5f7;
+            --colorPrimaryOutline: #dff5f7;
+            --colorButtonNormal: #00b3bb;
+            --colorButtonHover: #00cdd7;
+            --colorLinkNormal: #00979f;
+            --colorLinkHover: #00cdd7;
+            }
+
+
+
+
+            .upload_dropZone {
+            color: #0f3c4b;
+            background-color: var(--colorPrimaryPale, #c8dadf);
+            outline: 2px dashed var(--colorPrimaryHalf, #c1ddef);
+            outline-offset: -12px;
+            transition:
+                outline-offset 0.2s ease-out,
+                outline-color 0.3s ease-in-out,
+                background-color 0.2s ease-out;
+            }
+            .upload_dropZone.highlight {
+            outline-offset: -4px;
+            outline-color: var(--colorPrimaryNormal, #0576bd);
+            background-color: var(--colorPrimaryEighth, #c8dadf);
+            }
+            .upload_svg {
+            fill: var(--colorPrimaryNormal, #0576bd);
+            }
+            .btn-upload {
+            color: #fff;
+            background-color: var(--colorPrimaryNormal);
+            }
+            .btn-upload:hover,
+            .btn-upload:focus {
+            color: #fff;
+            background-color: var(--colorPrimaryGlare);
+            }
+            .upload_img {
+            width: calc(33.333% - (2rem / 3));
+            object-fit: contain;
+            }
 
     </style>
 </head>
@@ -336,7 +418,7 @@
     <!-- Sign Up Modal -->
 
 
-       <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+   <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -344,12 +426,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="./home/index.php" method="post">
+                    <form action="./home/index.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="signUpName" class="form-label open-sans-semibold" style="color: #0a0a0a;">Full name</label>
                             <input type="text" class="form-control" id="signUpName" name="fname" required>
                         </div>
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label for="signUpPhone" class="form-label open-sans-semibold" style="color: #0a0a0a;">Phone Number</label>
                             <input type="text" class="form-control" id="signUpPhone" name="phone" required>
                         </div>
@@ -361,14 +443,50 @@
                             <label for="signUpPassword" class="form-label open-sans-semibold" style="color: #0a0a0a;">Password</label>
                             <input type="password" class="form-control" id="signUpPassword" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary oxygen-semibold" >Sign Up</button>
+                        <div class="mb-3">
+                          <h1 class="h6 open-sans-semibold mb-3">Upload Photo</h1>
+
+<form>
+
+  <fieldset class="upload_dropZone text-center mb-3 p-4">
+
+    <legend class="visually-hidden">Image uploader</legend>
+
+    <svg class="upload_svg" width="60" height="60" aria-hidden="true">
+      <use href="#icon-imageUpload"></use>
+    </svg>
+
+    <p class="small my-2">Drag &amp; Drop background image(s) inside dashed region<br><i>or</i></p>
+
+                            <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" accept="image/jpeg, image/png, image/svg+xml" />
+
+                            <label class="btn btn-upload mb-3" for="upload_image_background">Choose file(s)</label>
+
+                            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+
+                        </fieldset>
+
+                        </form>
+
+
+                        <svg style="display:none">
+                        <defs>
+                            <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
+                            <path d="M47 6a21 21 0 0 0-12.3 3.8c-2.7 2.1-4.4 5-4.7 7.1-5.8 1.2-10.3 5.6-10.3 10.6 0 6 5.8 11 13 11h12.6V22.7l-7.1 6.8c-.4.3-.9.5-1.4.5-1 0-2-.8-2-1.7 0-.4.3-.9.6-1.2l10.3-8.8c.3-.4.8-.6 1.3-.6.6 0 1 .2 1.4.6l10.2 8.8c.4.3.6.8.6 1.2 0 1-.9 1.7-2 1.7-.5 0-1-.2-1.3-.5l-7.2-6.8v15.6h14.4c6.1 0 11.2-4.1 11.2-9.4 0-5-4-8.8-9.5-9.4C63.8 11.8 56 5.8 47 6Zm-1.7 42.7V38.4h3.4v10.3c0 .8-.7 1.5-1.7 1.5s-1.7-.7-1.7-1.5Z M27 49c-4 0-7 2-7 6v29c0 3 3 6 6 6h42c3 0 6-3 6-6V55c0-4-3-6-7-6H28Zm41 3c1 0 3 1 3 3v19l-13-6a2 2 0 0 0-2 0L44 79l-10-5a2 2 0 0 0-2 0l-9 7V55c0-2 2-3 4-3h41Z M40 62c0 2-2 4-5 4s-5-2-5-4 2-4 5-4 5 2 5 4Z"/>
+                            </symbol>
+                        </defs>
+                        </svg>
+                        </div>
+                        <button type="submit" class="btn btn-primary oxygen-semibold">Sign Up</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script>
         document.getElementById('search-input').addEventListener('input', function() {
             const query = this.value;
@@ -398,6 +516,169 @@
                 document.getElementById('property-list').innerHTML = '';
             }
         });
+
+
+        
+    </script>
+
+    <script>
+        /* Bootstrap 5 JS included */
+
+            console.clear();
+            ('use strict');
+
+
+            // Drag and drop - single or multiple image files
+            // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+            // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
+            (function () {
+
+            'use strict';
+            
+            // Four objects of interest: drop zones, input elements, gallery elements, and the files.
+            // dataRefs = {files: [image files], input: element ref, gallery: element ref}
+
+            const preventDefaults = event => {
+                event.preventDefault();
+                event.stopPropagation();
+            };
+
+            const highlight = event =>
+                event.target.classList.add('highlight');
+            
+            const unhighlight = event =>
+                event.target.classList.remove('highlight');
+
+            const getInputAndGalleryRefs = element => {
+                const zone = element.closest('.upload_dropZone') || false;
+                const gallery = zone.querySelector('.upload_gallery') || false;
+                const input = zone.querySelector('input[type="file"]') || false;
+                return {input: input, gallery: gallery};
+            }
+
+            const handleDrop = event => {
+                const dataRefs = getInputAndGalleryRefs(event.target);
+                dataRefs.files = event.dataTransfer.files;
+                handleFiles(dataRefs);
+            }
+
+
+            const eventHandlers = zone => {
+
+                const dataRefs = getInputAndGalleryRefs(zone);
+
+                if (!dataRefs.input) return;
+
+                // Prevent default drag behaviors
+                ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+                zone.addEventListener(event, preventDefaults, false);
+                document.body.addEventListener(event, preventDefaults, false);
+                });
+
+                // Highlighting drop area when item is dragged over it
+                ;['dragenter', 'dragover'].forEach(event => {
+                zone.addEventListener(event, highlight, false);
+                });
+                ;['dragleave', 'drop'].forEach(event => {
+                zone.addEventListener(event, unhighlight, false);
+                });
+
+                // Handle dropped files
+                zone.addEventListener('drop', handleDrop, false);
+
+                // Handle browse selected files
+                dataRefs.input.addEventListener('change', event => {
+                dataRefs.files = event.target.files;
+                handleFiles(dataRefs);
+                }, false);
+
+            }
+
+
+            // Initialise ALL dropzones
+            const dropZones = document.querySelectorAll('.upload_dropZone');
+            for (const zone of dropZones) {
+                eventHandlers(zone);
+            }
+
+
+            // No 'image/gif' or PDF or webp allowed here, but it's up to your use case.
+            // Double checks the input "accept" attribute
+            const isImageFile = file => 
+                ['image/jpeg', 'image/png', 'image/svg+xml'].includes(file.type);
+
+
+            function previewFiles(dataRefs) {
+                if (!dataRefs.gallery) return;
+                for (const file of dataRefs.files) {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function() {
+                    let img = document.createElement('img');
+                    img.className = 'upload_img mt-2';
+                    img.setAttribute('alt', file.name);
+                    img.src = reader.result;
+                    dataRefs.gallery.appendChild(img);
+                }
+                }
+            }
+
+            // Based on: https://flaviocopes.com/how-to-upload-files-fetch/
+            const imageUpload = dataRefs => {
+
+                // Multiple source routes, so double check validity
+                if (!dataRefs.files || !dataRefs.input) return;
+
+                const url = dataRefs.input.getAttribute('data-post-url');
+                if (!url) return;
+
+                const name = dataRefs.input.getAttribute('data-post-name');
+                if (!name) return;
+
+                const formData = new FormData();
+                formData.append(name, dataRefs.files);
+
+                fetch(url, {
+                method: 'POST',
+                body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                console.log('posted: ', data);
+                if (data.success === true) {
+                    previewFiles(dataRefs);
+                } else {
+                    console.log('URL: ', url, '  name: ', name)
+                }
+                })
+                .catch(error => {
+                console.error('errored: ', error);
+                });
+            }
+
+
+            // Handle both selected and dropped files
+            const handleFiles = dataRefs => {
+
+                let files = [...dataRefs.files];
+
+                // Remove unaccepted file types
+                files = files.filter(item => {
+                if (!isImageFile(item)) {
+                    console.log('Not an image, ', item.type);
+                }
+                return isImageFile(item) ? item : null;
+                });
+
+                if (!files.length) return;
+                dataRefs.files = files;
+
+                previewFiles(dataRefs);
+                imageUpload(dataRefs);
+            }
+
+            })();
+
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
