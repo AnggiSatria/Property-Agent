@@ -30,28 +30,6 @@ if (isset($_POST["submit"])) {
     }
 };
 
-// Check if login
-
-
-
-// function generate_uuid_v4() {
-//     $data = random_bytes(16);
-//     $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // versi 4
-//     $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // varian 10x
-
-//     return sprintf(
-//         '%08s-%04s-%04s-%04s-%12s',
-//         bin2hex(substr($data, 0, 4)),
-//         bin2hex(substr($data, 4, 2)),
-//         bin2hex(substr($data, 6, 2)),
-//         bin2hex(substr($data, 8, 2)),
-//         bin2hex(substr($data, 10, 6))
-//     );
-// };
-
-// $id -> generate_uuid_v4();
-// $full_name ->  
-
 
 ?>
 
@@ -238,21 +216,6 @@ if (isset($_POST["submit"])) {
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <!-- <header class="header d-flex">
-        <div>
-            <h1 style="color: #0a0a0a;" class="oxygen-bold">Welcome to CARIKOST</h1>
-            <p class="oxygen-semibold" style="color: #1D1A1A;">Your dream home awaits</p>
-            <a href="#properties" class="btn btn-primary open-sans-semibold">View Properties</a>
-        </div>
-         <div class="container my-5">
-        <h2>Search Properties</h2>
-        <input type="text" id="search-input" class="form-control" placeholder="Search for properties...">
-        <div id="property-list" class="row mt-3">
-            Search results will be appended here
-        </div>
-    </div>
-    </header> -->
 
     <header class="header d-flex justify-content-between align-items-center">
         <div>
@@ -522,22 +485,14 @@ if (isset($_POST["submit"])) {
     </script>
 
     <script>
-        /* Bootstrap 5 JS included */
 
-            console.clear();
-            ('use strict');
+        console.clear();
+        ('use strict');
 
+        (function () {
 
-            // Drag and drop - single or multiple image files
-            // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-            // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
-            (function () {
-
-            'use strict';
+        'use strict';
             
-            // Four objects of interest: drop zones, input elements, gallery elements, and the files.
-            // dataRefs = {files: [image files], input: element ref, gallery: element ref}
-
             const preventDefaults = event => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -562,20 +517,17 @@ if (isset($_POST["submit"])) {
                 handleFiles(dataRefs);
             }
 
-
             const eventHandlers = zone => {
 
                 const dataRefs = getInputAndGalleryRefs(zone);
 
                 if (!dataRefs.input) return;
 
-                // Prevent default drag behaviors
                 ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
                 zone.addEventListener(event, preventDefaults, false);
                 document.body.addEventListener(event, preventDefaults, false);
                 });
 
-                // Highlighting drop area when item is dragged over it
                 ;['dragenter', 'dragover'].forEach(event => {
                 zone.addEventListener(event, highlight, false);
                 });
@@ -583,10 +535,8 @@ if (isset($_POST["submit"])) {
                 zone.addEventListener(event, unhighlight, false);
                 });
 
-                // Handle dropped files
                 zone.addEventListener('drop', handleDrop, false);
 
-                // Handle browse selected files
                 dataRefs.input.addEventListener('change', event => {
                 dataRefs.files = event.target.files;
                 handleFiles(dataRefs);
@@ -594,22 +544,18 @@ if (isset($_POST["submit"])) {
 
             }
 
-
-            // Initialise ALL dropzones
             const dropZones = document.querySelectorAll('.upload_dropZone');
             for (const zone of dropZones) {
                 eventHandlers(zone);
             }
 
-
-            // No 'image/gif' or PDF or webp allowed here, but it's up to your use case.
-            // Double checks the input "accept" attribute
             const isImageFile = file => 
                 ['image/jpeg', 'image/png', 'image/svg+xml'].includes(file.type);
 
-
             function previewFiles(dataRefs) {
                 if (!dataRefs.gallery) return;
+                // Clear previous images
+                dataRefs.gallery.innerHTML = '';
                 for (const file of dataRefs.files) {
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
@@ -623,10 +569,7 @@ if (isset($_POST["submit"])) {
                 }
             }
 
-            // Based on: https://flaviocopes.com/how-to-upload-files-fetch/
             const imageUpload = dataRefs => {
-
-                // Multiple source routes, so double check validity
                 if (!dataRefs.files || !dataRefs.input) return;
 
                 const url = dataRefs.input.getAttribute('data-post-url');
@@ -656,13 +599,8 @@ if (isset($_POST["submit"])) {
                 });
             }
 
-
-            // Handle both selected and dropped files
             const handleFiles = dataRefs => {
-
                 let files = [...dataRefs.files];
-
-                // Remove unaccepted file types
                 files = files.filter(item => {
                 if (!isImageFile(item)) {
                     console.log('Not an image, ', item.type);
@@ -677,7 +615,7 @@ if (isset($_POST["submit"])) {
                 imageUpload(dataRefs);
             }
 
-            })();
+        })();
 
     </script>
 
