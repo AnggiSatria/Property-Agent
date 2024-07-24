@@ -1,34 +1,195 @@
 <?php 
 
-include("./server/database/users.php");
+include("./server/function/users.php");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// if (isset($_POST["submit"])) {
+//     if (registerUser($_POST) > 0) {
+//        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+//         echo "<script>
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Registers Success',
+//                 text: 'Registers Successfully'
+//             }).then(function() {
+//                 window.location = './home/index.php';
+//             });
+//         </script>";
+//     exit();
+//     }else{
+//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+//         echo "<script>
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Oops...',
+//                 text: 'Registers failed'
+//             }).then(function() {
+//                 window.location = 'index.php';
+//             });
+//         </script>";
+//     }
+// };
+
+// var_dump($_FILES['url_path']);
 
 
-if (isset($_POST["submit"])) {
-    if (registerUser($_POST) > 0) {
-       echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-        echo "<script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Registers Success',
-                text: 'Registers Successfully'
-            }).then(function() {
-                window.location = './home/index.php';
-            });
-        </script>";
-    exit();
-    }else{
-        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-        echo "<script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Registers failed'
-            }).then(function() {
-                window.location = 'index.php';
-            });
-        </script>";
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $upload_directory = 'uploads/';
+//     $file_path = '';
+
+//     if (isset($_FILES['url_path']) && $_FILES['url_path']['error'] === UPLOAD_ERR_OK) {
+//         $file_tmp_path = $_FILES['url_path']['tmp_name'];
+//         $file_name = basename($_FILES['url_path']['name']);
+//         $file_path = $upload_directory . $file_name;
+
+//         // Ensure the upload directory exists
+//         if (!is_dir($upload_directory)) {
+//             mkdir($upload_directory, 0755, true);
+//         }
+
+//         // Move the file to the specified directory
+//         if (move_uploaded_file($file_tmp_path, $file_path)) {
+//             $file_path = htmlspecialchars($file_path);
+//         } else {
+//             echo "<script>
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'File upload failed!',
+//                     text: 'Please try again.'
+//                 });
+//             </script>";
+//             exit;
+//         }
+//     }
+
+//     $_POST['url_path'] = $file_path;
+
+//     $register_result = registerUser($_POST);
+
+//     if ($register_result > 0) {
+//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+//         echo "<script>
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Register Success',
+//                 text: 'Register Successfully'
+//             }).then(function() {
+//                 setTimeout(function() {
+//                     window.location.href = './home/index.php';
+//                 }, 300);
+//             });
+//         </script>";
+//     } elseif ($register_result == -1) {
+//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+//         echo "<script>
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Email already exists!',
+//                 text: 'Please enter another email address'
+//             });
+//         </script>";
+//     } else {
+//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+//         echo "<script>
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Registration failed!',
+//                 text: 'Please check your registration'
+//             });
+//         </script>";
+//     }
+// }
+
+// if (isset($_COOKIE['token'])) {
+//     header("Location: /");
+//     exit;
+// }else{
+//     header("Location: /");
+//     exit;
+// }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $upload_directory = 'uploads/';
+    $file_url = '';  // Variabel untuk menyimpan URL gambar
+
+    if (isset($_FILES['url_path']) && $_FILES['url_path']['error'] === UPLOAD_ERR_OK) {
+        $file_tmp_path = $_FILES['url_path']['tmp_name'];
+        $file_name = basename($_FILES['url_path']['name']);
+        $file_path = $upload_directory . $file_name;
+
+        // Ensure the upload directory exists
+        if (!is_dir($upload_directory)) {
+            mkdir($upload_directory, 0755, true);
+        }
+
+        // Move the file to the specified directory
+        if (move_uploaded_file($file_tmp_path, $file_path)) {
+            $file_url = 'http://localhost/' . $file_path;
+
+            // Add the file URL to the POST data
+            $_POST['url_path'] = $file_url;
+
+            // Register user
+            $register_result = registerUser($_POST);
+            file_put_contents('log.txt', var_export($register_result, true) . PHP_EOL, FILE_APPEND);
+
+            var_dump($register_result);
+            
+            ob_flush();
+            flush();
+
+            if (is_array($register_result) && $register_result['insert_id'] >= 0) {
+
+                setcookie('token', $register_result['token'], time() + (86400 * 30), "/");
+                setcookie('refreshToken', $register_result['refreshToken'], time() + (86400 * 30), "/");
+
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Register Success',
+                        text: 'Register Successfully'
+                    }).then(function() {
+                        setTimeout(function() {
+                            window.location.href = './client/home/index.php';
+                        }, 300);
+                    });
+                </script>";
+            } elseif (is_array($register_result) && $register_result['insert_id'] == -1) {
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email already exists!',
+                        text: 'Please enter another email address'
+                    });
+                </script>";
+            } else {
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration failed!',
+                        text: 'Please check your registration'
+                    });
+                </script>";
+            }
+        } else {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'File upload failed!',
+                    text: 'Please try again.'
+                });
+            </script>";
+            exit;
+        }
     }
-};
+}
+
 
 
 ?>
@@ -381,7 +542,8 @@ if (isset($_POST["submit"])) {
     <!-- Sign Up Modal -->
 
 
-   <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -389,10 +551,10 @@ if (isset($_POST["submit"])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="./home/index.php" method="post" enctype="multipart/form-data">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="signUpName" class="form-label open-sans-semibold" style="color: #0a0a0a;">Full name</label>
-                            <input type="text" class="form-control" id="signUpName" name="fname" required>
+                            <input type="text" class="form-control" id="signUpName" name="full_name" required>
                         </div>
                         <div class="mb-3">
                             <label for="signUpPhone" class="form-label open-sans-semibold" style="color: #0a0a0a;">Phone Number</label>
@@ -407,38 +569,24 @@ if (isset($_POST["submit"])) {
                             <input type="password" class="form-control" id="signUpPassword" name="password" required>
                         </div>
                         <div class="mb-3">
-                          <h1 class="h6 open-sans-semibold mb-3">Upload Photo</h1>
-
-<form>
-
-  <fieldset class="upload_dropZone text-center mb-3 p-4">
-
-    <legend class="visually-hidden">Image uploader</legend>
-
-    <svg class="upload_svg" width="60" height="60" aria-hidden="true">
-      <use href="#icon-imageUpload"></use>
-    </svg>
-
-    <p class="small my-2">Drag &amp; Drop background image(s) inside dashed region<br><i>or</i></p>
-
-                            <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" accept="image/jpeg, image/png, image/svg+xml" />
-
-                            <label class="btn btn-upload mb-3" for="upload_image_background">Choose file(s)</label>
-
-                            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
-
-                        </fieldset>
-
-                        </form>
-
-
-                        <svg style="display:none">
-                        <defs>
-                            <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
-                            <path d="M47 6a21 21 0 0 0-12.3 3.8c-2.7 2.1-4.4 5-4.7 7.1-5.8 1.2-10.3 5.6-10.3 10.6 0 6 5.8 11 13 11h12.6V22.7l-7.1 6.8c-.4.3-.9.5-1.4.5-1 0-2-.8-2-1.7 0-.4.3-.9.6-1.2l10.3-8.8c.3-.4.8-.6 1.3-.6.6 0 1 .2 1.4.6l10.2 8.8c.4.3.6.8.6 1.2 0 1-.9 1.7-2 1.7-.5 0-1-.2-1.3-.5l-7.2-6.8v15.6h14.4c6.1 0 11.2-4.1 11.2-9.4 0-5-4-8.8-9.5-9.4C63.8 11.8 56 5.8 47 6Zm-1.7 42.7V38.4h3.4v10.3c0 .8-.7 1.5-1.7 1.5s-1.7-.7-1.7-1.5Z M27 49c-4 0-7 2-7 6v29c0 3 3 6 6 6h42c3 0 6-3 6-6V55c0-4-3-6-7-6H28Zm41 3c1 0 3 1 3 3v19l-13-6a2 2 0 0 0-2 0L44 79l-10-5a2 2 0 0 0-2 0l-9 7V55c0-2 2-3 4-3h41Z M40 62c0 2-2 4-5 4s-5-2-5-4 2-4 5-4 5 2 5 4Z"/>
-                            </symbol>
-                        </defs>
-                        </svg>
+                            <h1 class="h6 open-sans-semibold mb-3">Upload Photo</h1>
+                            <fieldset class="upload_dropZone text-center mb-3 p-4">
+                                <legend class="visually-hidden">Image uploader</legend>
+                                <svg class="upload_svg" width="60" height="60" aria-hidden="true">
+                                    <use href="#icon-imageUpload"></use>
+                                </svg>
+                                <p class="small my-2">Drag &amp; Drop background image inside dashed region<br><i>or</i></p>
+                                <input id="upload_url_path" class="position-absolute invisible" type="file" name="url_path" accept="image/jpeg, image/png, image/svg+xml" />
+                                <label class="btn btn-upload mb-3" for="upload_url_path">Choose file</label>
+                                <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+                            </fieldset>
+                            <svg style="display:none">
+                                <defs>
+                                    <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
+                                        <path d="M47 6a21 21 0 0 0-12.3 3.8c-2.7 2.1-4.4 5-4.7 7.1-5.8 1.2-10.3 5.6-10.3 10.6 0 6 5.8 11 13 11h12.6V22.7l-7.1 6.8c-.4.3-.9.5-1.4.5-1 0-2-.8-2-1.7 0-.4.3-.9.6-1.2l10.3-8.8c.3-.4.8-.6 1.3-.6.6 0 1 .2 1.4.6l10.2 8.8c.4.3.6.8.6 1.2 0 1-.9 1.7-2 1.7-.5 0-1-.2-1.3-.5l-7.2-6.8v15.6h14.4c6.1 0 11.2-4.1 11.2-9.4 0-5-4-8.8-9.5-9.4C63.8 11.8 56 5.8 47 6Zm-1.7 42.7V38.4h3.4v10.3c0 .8-.7 1.5-1.7 1.5s-1.7-.7-1.7-1.5Z M27 49c-4 0-7 2-7 6v29c0 3 3 6 6 6h42c3 0 6-3 6-6V55c0-4-3-6-7-6H28Zm41 3c1 0 3 1 3 3v19l-13-6a2 2 0 0 0-2 0L44 79l-10-5a2 2 0 0 0-2 0l-9 7V55c0-2 2-3 4-3h41Z M40 62c0 2-2 4-5 4s-5-2-5-4 2-4 5-4 5 2 5 4Z"/>
+                                    </symbol>
+                                </defs>
+                            </svg>
                         </div>
                         <button type="submit" class="btn btn-primary oxygen-semibold">Sign Up</button>
                     </form>
@@ -446,6 +594,7 @@ if (isset($_POST["submit"])) {
             </div>
         </div>
     </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -486,77 +635,77 @@ if (isset($_POST["submit"])) {
 
     <script>
 
-        console.clear();
-        ('use strict');
+    console.clear();
+    'use strict';
 
-        (function () {
+    (function () {
 
-        'use strict';
-            
-            const preventDefaults = event => {
-                event.preventDefault();
-                event.stopPropagation();
-            };
+    'use strict';
+        
+    const preventDefaults = event => {
+        event.preventDefault();
+        event.stopPropagation();
+    };
 
-            const highlight = event =>
-                event.target.classList.add('highlight');
-            
-            const unhighlight = event =>
-                event.target.classList.remove('highlight');
+    const highlight = event =>
+        event.target.classList.add('highlight');
+    
+    const unhighlight = event =>
+        event.target.classList.remove('highlight');
 
-            const getInputAndGalleryRefs = element => {
-                const zone = element.closest('.upload_dropZone') || false;
-                const gallery = zone.querySelector('.upload_gallery') || false;
-                const input = zone.querySelector('input[type="file"]') || false;
-                return {input: input, gallery: gallery};
-            }
+    const getInputAndGalleryRefs = element => {
+        const zone = element.closest('.upload_dropZone') || false;
+        const gallery = zone.querySelector('.upload_gallery') || false;
+        const input = zone.querySelector('input[type="file"]') || false;
+        return {input: input, gallery: gallery};
+    }
 
-            const handleDrop = event => {
-                const dataRefs = getInputAndGalleryRefs(event.target);
-                dataRefs.files = event.dataTransfer.files;
-                handleFiles(dataRefs);
-            }
+    const handleDrop = event => {
+        const dataRefs = getInputAndGalleryRefs(event.target);
+        dataRefs.files = event.dataTransfer.files;
+        handleFiles(dataRefs);
+    }
 
-            const eventHandlers = zone => {
+    const eventHandlers = zone => {
 
-                const dataRefs = getInputAndGalleryRefs(zone);
+        const dataRefs = getInputAndGalleryRefs(zone);
 
-                if (!dataRefs.input) return;
+        if (!dataRefs.input) return;
 
-                ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
-                zone.addEventListener(event, preventDefaults, false);
-                document.body.addEventListener(event, preventDefaults, false);
-                });
+        ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+            zone.addEventListener(event, preventDefaults, false);
+            document.body.addEventListener(event, preventDefaults, false);
+        });
 
-                ;['dragenter', 'dragover'].forEach(event => {
-                zone.addEventListener(event, highlight, false);
-                });
-                ;['dragleave', 'drop'].forEach(event => {
-                zone.addEventListener(event, unhighlight, false);
-                });
+        ;['dragenter', 'dragover'].forEach(event => {
+            zone.addEventListener(event, highlight, false);
+        });
+        ;['dragleave', 'drop'].forEach(event => {
+            zone.addEventListener(event, unhighlight, false);
+        });
 
-                zone.addEventListener('drop', handleDrop, false);
+        zone.addEventListener('drop', handleDrop, false);
 
-                dataRefs.input.addEventListener('change', event => {
-                dataRefs.files = event.target.files;
-                handleFiles(dataRefs);
-                }, false);
+        dataRefs.input.addEventListener('change', event => {
+            dataRefs.files = event.target.files;
+            handleFiles(dataRefs);
+        }, false);
 
-            }
+    }
 
-            const dropZones = document.querySelectorAll('.upload_dropZone');
-            for (const zone of dropZones) {
-                eventHandlers(zone);
-            }
+    const dropZones = document.querySelectorAll('.upload_dropZone');
+    for (const zone of dropZones) {
+        eventHandlers(zone);
+    }
 
-            const isImageFile = file => 
-                ['image/jpeg', 'image/png', 'image/svg+xml'].includes(file.type);
+    const isImageFile = file => 
+        ['image/jpeg', 'image/png', 'image/svg+xml'].includes(file.type);
 
-            function previewFiles(dataRefs) {
-                if (!dataRefs.gallery) return;
-                // Clear previous images
-                dataRefs.gallery.innerHTML = '';
-                for (const file of dataRefs.files) {
+        function previewFiles(dataRefs) {
+            if (!dataRefs.gallery) return;
+            // Clear previous images
+            dataRefs.gallery.innerHTML = '';
+            for (const file of dataRefs.files) {
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onloadend = function() {
@@ -566,56 +715,59 @@ if (isset($_POST["submit"])) {
                     img.src = reader.result;
                     dataRefs.gallery.appendChild(img);
                 }
-                }
             }
+        }
 
-            const imageUpload = dataRefs => {
-                if (!dataRefs.files || !dataRefs.input) return;
+        const imageUpload = dataRefs => {
+            if (!dataRefs.files || !dataRefs.input) return;
 
-                const url = dataRefs.input.getAttribute('data-post-url');
-                if (!url) return;
+            const url = dataRefs.input.getAttribute('data-post-url');
+            if (!url) return;
 
-                const name = dataRefs.input.getAttribute('data-post-name');
-                if (!name) return;
+            const name = dataRefs.input.getAttribute('data-post-name');
+            if (!name) return;
 
-                const formData = new FormData();
-                formData.append(name, dataRefs.files);
+            const formData = new FormData();
+            formData.append(name, dataRefs.files[0]); // Ambil file pertama saja
 
-                fetch(url, {
+            fetch(url, {
                 method: 'POST',
                 body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
+            })
+            .then(response => response.json())
+            .then(data => {
                 console.log('posted: ', data);
                 if (data.success === true) {
                     previewFiles(dataRefs);
+                    // Set URL path to hidden input
+                    document.getElementById('urlPathInput').value = data.url; // Sesuaikan dengan format response dari server
                 } else {
-                    console.log('URL: ', url, '  name: ', name)
+                    console.log('URL: ', url, '  name: ', name);
                 }
-                })
-                .catch(error => {
+            })
+            .catch(error => {
                 console.error('errored: ', error);
-                });
-            }
+            });
+        }
 
-            const handleFiles = dataRefs => {
-                let files = [...dataRefs.files];
-                files = files.filter(item => {
+        const handleFiles = dataRefs => {
+            let files = [...dataRefs.files];
+            files = files.filter(item => {
                 if (!isImageFile(item)) {
                     console.log('Not an image, ', item.type);
                 }
                 return isImageFile(item) ? item : null;
-                });
+            });
 
-                if (!files.length) return;
-                dataRefs.files = files;
+            if (!files.length) return;
+            dataRefs.files = files;
 
-                previewFiles(dataRefs);
-                imageUpload(dataRefs);
-            }
+            previewFiles(dataRefs);
+            imageUpload(dataRefs);
+        }
 
-        })();
+    })();
+
 
     </script>
 

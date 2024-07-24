@@ -1,0 +1,96 @@
+title: AdminLTE v3.2 Documentation
+version: v3.2
+description: AdminLTE v3.2 Documentation
+
+baseurl: /docs/3.2
+url: https://adminlte.io
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+navigation:
+  - title: Installation
+    url: index.php
+    icon: fas fa-microchip
+  - title: Dependencies & Plugins
+    url: dependencies.php
+    icon: fas fa-handshake
+  - title: Layout
+    url: layout.php
+    icon: fas fa-copy
+  - title: Components
+    icon: fas fa-th
+    url: components
+    subitems:
+      - title: Main Header
+        url: components/main-header.php
+      - title: Main Sidebar
+        url: components/main-sidebar.php
+      - title: Control Sidebar
+        url: components/control-sidebar.php
+      - title: Card
+        url: components/cards.php
+      - title: Small-/ Info-Box
+        url: components/boxes.php
+      - title: Direct Chat
+        url: components/direct-chat.php
+      - title: Timeline
+        url: components/timeline.php
+      - title: Ribbons
+        url: components/ribbons.php
+      - title: Miscellaneous
+        url: components/miscellaneous.php
+      - title: Plugins
+        url: components/plugins.php
+  - title: JavaScript
+    icon: fas fa-code
+    url: javascript
+    subitems:
+      - title: Layout
+        url: javascript/layout.php
+      - title: Push Menu
+        url: javascript/push-menu.php
+      - title: Treeview
+        url: javascript/treeview.php
+      - title: Card Widget
+        url: javascript/card-widget.php
+      - title: CardRefresh
+        url: javascript/card-refresh.php
+      - title: Control Sidebar
+        url: javascript/control-sidebar.php
+      - title: Direct Chat
+        url: javascript/direct-chat.php
+      - title: Todo List
+        url: javascript/todo-list.php
+      - title: Toasts
+        url: javascript/toasts.php
+      - title: Sidebar Search
+        url: javascript/sidebar-search.php
+      - title: Expandable Tables
+        url: javascript/expandable-tables.php
+      - title: IFrame
+        url: javascript/iframe.php
+      - title: Navbar Search
+        url: javascript/navbar-search.php
+  - title: Browser Support
+    url: browser-support.php
+    icon: fab fa-chrome
+  - title: Implementations
+    url: implementations.php
+    icon: fas fa-bookmark
+  - title: Additional Styles
+    url: additional-styles.php
+    icon: fas fa-mortar-pestle
+  - title: Upgrade Guide
+    url: upgrade-guide.php
+    icon: fas fa-hand-point-up
+  - title: Contributing Guide
+    url: how-to-contribute.php
+    icon: fas fa-hands-helping
+  - title: FAQ
+    url: faq.php
+    icon: fas fa-question-circle
+  - title: License
+    url: license.php
+    icon: fas fa-file-contract

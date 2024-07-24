@@ -1,0 +1,69 @@
+-1
+-1
+Execute result: true
+Stmt error: 
+0
+-1
+-1
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '3bc37d8acf3264d11e1af2eca3257ffb',
+  'refreshToken' => '5efc54fb88361961b67df246c4835bad3b0ce624ac0a4e71f0535c76bc004e83',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => 'c5a84d9059e3f7b6cd080b9d01d71631',
+  'refreshToken' => '9342009aceaa1dcc62758d7e712cbd5b3f569b7ee5efd76dc3eb12f3888db2e3',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => 'af6851bf834efc0854d915fc4835daef',
+  'refreshToken' => '413cfccc126ff5d8661ec12aae1966cc413f36c9651aa1b9f8b7ca8f83366237',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '5375e7d11b858ac57695148b62cc6e08',
+  'refreshToken' => '3a2229612fca7d2342ed2177d1a7962ffcfba38a26325f6d1ee974f65a4a44af',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '32c4f96515b4422461b374bd7b023b76',
+  'refreshToken' => '9d3a2b8b8d35b2ffa9e26ea8e4eccadb3c6a5df1df003130e056a11c5d37e6e9',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '13f2234673b2bbc7c583ef1531155830',
+  'refreshToken' => '3f2c4cb558150267299cac991c479ec7e3bd104e4741df883e14a41aa5895d3d',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '248b1b0aee52fa5b5b7ef844bf45f862',
+  'refreshToken' => '2f1c4c150b6b7f64e83a56b711dc0097a2c79529893b8e03bc96ab0b49a80f73',
+)
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => 'c8fe2280cbecc71feb07b04e38e116a2',
+  'refreshToken' => 'acd8c07882a03ceda60e25076931fc1dbf6a934a860220339a3959da545df6c4',
+)
+-1
+-1
+-1
+-1
+-1
+-1
