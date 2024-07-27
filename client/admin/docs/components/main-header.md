@@ -22,7 +22,7 @@ The main header contains the navbar. Construction of the navbar differs slightly
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.php" class="nav-link">Home</a>
+      <a href="index.php" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>
@@ -157,7 +157,7 @@ The main header contains the navbar. Construction of the navbar differs slightly
       ></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.php" class="nav-link">Home</a>
+      <a href="index.php" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>
@@ -341,7 +341,7 @@ Top navbar example can be found in this [demo page](https://adminlte.io/themes/d
 
 <nav class="navbar navbar-expand navbar-light navbar-white">
   <div class="container">
-    <a href="index3.php" class="navbar-brand">
+    <a href="index.php" class="navbar-brand">
       <img src="{{ '/assets/img/AdminLTELogo.png' | prepend: site.baseurl }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8; max-height: 33px;">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -351,7 +351,7 @@ Top navbar example can be found in this [demo page](https://adminlte.io/themes/d
       <li class="nav-item">
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.php" class="nav-link">Home</a>
+        <a href="index.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -478,7 +478,7 @@ Top navbar example can be found in this [demo page](https://adminlte.io/themes/d
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-light navbar-white">
   <div class="container">
-    <a href="index3.php" class="navbar-brand">
+    <a href="index.php" class="navbar-brand">
       <img
         src="dist/img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -491,7 +491,7 @@ Top navbar example can be found in this [demo page](https://adminlte.io/themes/d
     <ul class="navbar-nav">
       <li class="nav-item"></li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.php" class="nav-link">Home</a>
+        <a href="index.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>

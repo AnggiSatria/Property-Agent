@@ -40,7 +40,7 @@
             ></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="../../index3.php" class="nav-link">Home</a>
+            <a href="/client/admin" class="nav-link">Home</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -223,7 +223,7 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../../index3.php" class="brand-link">
+        <a href="../../index.php" class="brand-link">
           <img
             src="../../dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
@@ -298,7 +298,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index3.php" class="nav-link">
+                    <a href="../../index.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dashboard v3</p>
                     </a>
@@ -936,7 +936,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/client/admin/">Home</a></li>
                   <li class="breadcrumb-item active">Text Editors</li>
                 </ol>
               </div>

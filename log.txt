@@ -67,3 +67,12 @@ array (
 -1
 -1
 -1
+Before execute
+Params: ["66a44d14039bd5.84678255","Anggi Satria","Anggi","Satria","anggisatria@mail.com","0895600414111","$2y$10$BnxrNYgfOHB3KrqBWHRwMubeHOyii9.Ua6Aq1EYy3Lu9nDf8LXyz6","","http:\/\/localhost\/uploads\/YFheWm.jpg","users","1e12edd692b455e3cab336b2328c58d8","1bfa317011a6dd81f408b1244cffec4b4d4b0a374bbb85f75df72d067fe91c3e"]
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '1e12edd692b455e3cab336b2328c58d8',
+  'refreshToken' => '1bfa317011a6dd81f408b1244cffec4b4d4b0a374bbb85f75df72d067fe91c3e',
+)

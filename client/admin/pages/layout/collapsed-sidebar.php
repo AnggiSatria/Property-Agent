@@ -31,7 +31,7 @@
             ></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="../../index3.php" class="nav-link">Home</a>
+            <a href="/client/admin/" class="nav-link">Home</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -214,7 +214,7 @@
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="../../index3.php" class="brand-link">
+        <a href="../../index.php" class="brand-link">
           <img
             src="../../dist/img/AdminLTELogo.png"
             alt="AdminLTE Logo"
@@ -268,30 +268,11 @@
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    Dashboard
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../index.php" class="nav-link">
+                    <a href="/client/admin/" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../../index2.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../../index3.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard v3</p>
+                      <p>Dashboard</p>
                     </a>
                   </li>
                 </ul>
@@ -930,7 +911,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/client/admin/">Home</a></li>
                   <li class="breadcrumb-item"><a href="#">Layout</a></li>
                   <li class="breadcrumb-item active">Collapsed Sidebar</li>
                 </ol>

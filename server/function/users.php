@@ -14,7 +14,7 @@ function getUsers(){
 
      $result = mysqli_query($conn, $get);
 
-      return $result;
+     return $result;
 
 }
 
@@ -144,6 +144,33 @@ function getUsersByParams($params){
 //     $stmt->close();
 // }
 
+function loginUser($email, $password) {
+    global $conn;
+
+    // Mempersiapkan query untuk memeriksa email
+    $stmt = $conn->prepare("SELECT id, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // Memeriksa apakah email ada di database
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $hashedPassword);
+        $stmt->fetch();
+
+        // Verifikasi password
+        if (password_verify($password, $hashedPassword)) {
+            return ["status" => "success", "message" => "Login successful", "user_id" => $id];
+        } else {
+            return ["status" => "error", "message" => "Incorrect password"];
+        }
+    } else {
+        return ["status" => "error", "message" => "Email not found"];
+    }
+}
+
+
+
 function registerUser($data){
     global $conn;
 
@@ -226,10 +253,6 @@ function registerUser($data){
     $stmt->close();
     ob_end_flush(); // Akhiri buffering output
 }
-
-
-
-
 
 
 function updatedUser($data){

@@ -29,7 +29,7 @@
 
   <ul class="navbar-nav ml-auto">
     <!-- <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.php" class="nav-link">Home</a>
+      <a href="index.php" class="nav-link">Home</a>
     </li> -->
     <li class="nav-item">
       <div class="theme-switch-wrapper nav-link">

@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         text: 'Register Successfully'
                     }).then(function() {
                         setTimeout(function() {
-                            window.location.href = './client/home/index.php';
+                            window.location.href = './client/users/home/index.php';
                         }, 300);
                     });
                 </script>";
@@ -187,6 +187,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </script>";
             exit;
         }
+    }
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $response = loginUser($email, $password);
+
+    var_dump($response);
+
+    // Menangani hasil login
+    if ($response['status'] == 'success') {
+               echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Success',
+                        text: 'Login Successfully'
+                    }).then(function() {
+                        setTimeout(function() {
+                            window.location.href = './client/users/home';
+                        }, 300);
+                    });
+                </script>";
+    } else if ($response['status'] == 'error') {
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: 'Email or Password is incorrect'
+                    })
+                </script>";
     }
 }
 
@@ -523,7 +558,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="./home/index.php" method="post">
+                    <form action="" method="post">
                         <div class="mb-3">
                             <label for="signInEmail" class="form-label open-sans-semibold" style="color: #0a0a0a;">Email address</label>
                             <input type="email" class="form-control" id="signInEmail" name="email" required>

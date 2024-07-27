@@ -41,7 +41,7 @@ Like above the biggest change is the Main Sidebar contains now the Logo and the 
 
 2. Logo / Brand Link
 
-- `<a href="index3.php" class="brand-link"><img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"><span class="brand-text font-weight-light">AdminLTE 3</span></a>` replaces the old logo
+- `<a href="index.php" class="brand-link"><img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"><span class="brand-text font-weight-light">AdminLTE 3</span></a>` replaces the old logo
 
 3. Sidebar
 

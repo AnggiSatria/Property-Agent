@@ -32,7 +32,7 @@
             ></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-            <a href="../index.php" class="nav-link">Home</a>
+            <a href="/admin" class="nav-link">Home</a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -269,14 +269,11 @@
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="../index.php" class="nav-link">
+                     <a href="../index.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Dashboard</p>
                     </a>
-                  </li>
-                </ul>
+          
               </li>
               <li class="nav-item">
                 <a href="widgets.php" class="nav-link active">

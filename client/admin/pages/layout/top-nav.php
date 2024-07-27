@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         class="main-header navbar navbar-expand-md navbar-light navbar-white"
       >
         <div class="container">
-          <a href="../../index3.php" class="navbar-brand">
+          <a href="../../index.php" class="navbar-brand">
             <img
               src="../../dist/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
@@ -55,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Left navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="index3.php" class="nav-link">Home</a>
+                <a href="/client/admin" class="nav-link">Home</a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">Contact</a>
