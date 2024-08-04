@@ -1,114 +1,8 @@
 <?php 
 
-include("./server/function/users.php");
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
 
-// if (isset($_POST["submit"])) {
-//     if (registerUser($_POST) > 0) {
-//        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-//         echo "<script>
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'Registers Success',
-//                 text: 'Registers Successfully'
-//             }).then(function() {
-//                 window.location = './home/index.php';
-//             });
-//         </script>";
-//     exit();
-//     }else{
-//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-//         echo "<script>
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Oops...',
-//                 text: 'Registers failed'
-//             }).then(function() {
-//                 window.location = 'index.php';
-//             });
-//         </script>";
-//     }
-// };
-
-// var_dump($_FILES['url_path']);
-
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $upload_directory = 'uploads/';
-//     $file_path = '';
-
-//     if (isset($_FILES['url_path']) && $_FILES['url_path']['error'] === UPLOAD_ERR_OK) {
-//         $file_tmp_path = $_FILES['url_path']['tmp_name'];
-//         $file_name = basename($_FILES['url_path']['name']);
-//         $file_path = $upload_directory . $file_name;
-
-//         // Ensure the upload directory exists
-//         if (!is_dir($upload_directory)) {
-//             mkdir($upload_directory, 0755, true);
-//         }
-
-//         // Move the file to the specified directory
-//         if (move_uploaded_file($file_tmp_path, $file_path)) {
-//             $file_path = htmlspecialchars($file_path);
-//         } else {
-//             echo "<script>
-//                 Swal.fire({
-//                     icon: 'error',
-//                     title: 'File upload failed!',
-//                     text: 'Please try again.'
-//                 });
-//             </script>";
-//             exit;
-//         }
-//     }
-
-//     $_POST['url_path'] = $file_path;
-
-//     $register_result = registerUser($_POST);
-
-//     if ($register_result > 0) {
-//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-//         echo "<script>
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'Register Success',
-//                 text: 'Register Successfully'
-//             }).then(function() {
-//                 setTimeout(function() {
-//                     window.location.href = './home/index.php';
-//                 }, 300);
-//             });
-//         </script>";
-//     } elseif ($register_result == -1) {
-//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-//         echo "<script>
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Email already exists!',
-//                 text: 'Please enter another email address'
-//             });
-//         </script>";
-//     } else {
-//         echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-//         echo "<script>
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Registration failed!',
-//                 text: 'Please check your registration'
-//             });
-//         </script>";
-//     }
-// }
-
-// if (isset($_COOKIE['token'])) {
-//     header("Location: /");
-//     exit;
-// }else{
-//     header("Location: /");
-//     exit;
-// }
+include "./server/function/users.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -136,10 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $register_result = registerUser($_POST);
             file_put_contents('log.txt', var_export($register_result, true) . PHP_EOL, FILE_APPEND);
 
-            var_dump($register_result);
-            
-            ob_flush();
-            flush();
+
 
             if (is_array($register_result) && $register_result['insert_id'] >= 0) {
 
@@ -197,7 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $response = loginUser($email, $password);
 
-    var_dump($response);
+
+    var_dump($response['status']);
 
     // Menangani hasil login
     if ($response['status'] == 'success') {
@@ -222,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'Email or Password is incorrect'
                     })
                 </script>";
+                  exit;
     }
 }
 
@@ -623,7 +516,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </defs>
                             </svg>
                         </div>
-                        <button type="submit" class="btn btn-primary oxygen-semibold">Sign Up</button>
+                        <button type="submit" name="register" class="btn btn-primary oxygen-semibold">Sign Up</button>
                     </form>
                 </div>
             </div>

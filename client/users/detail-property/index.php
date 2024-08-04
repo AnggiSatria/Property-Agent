@@ -1,4 +1,7 @@
 <?php
+
+// include('./dummy/dummy.php');
+
 $properties = [
     1 => [
         'title' => 'Luxury Villa in Bali',
@@ -10,7 +13,7 @@ $properties = [
         'type' => 'Luxury',
         'facilities' => ['Wifi', 'Pool', 'Gym', 'Parking'],
         'created_at' => '1 Januari 2023',
-        'image' => 'https://via.placeholder.com/750x500.png?text=Luxury+Villa+in+Bali'
+        'image' => 'https://cdn.rri.co.id/berita/Pusat_Pemberitaan/o/1710573699251-IMG_20240316_135220/f5zoa747c2q8lwc.jpeg'
     ],
     2 => [
         'title' => 'Modern Apartment in New York',
@@ -22,7 +25,7 @@ $properties = [
         'type' => 'Modern',
         'facilities' => ['Wifi', 'Elevator', 'Gym', 'Parking'],
         'created_at' => '15 Februari 2023',
-        'image' => 'https://via.placeholder.com/750x500.png?text=Modern+Apartment+in+New+York'
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4ilQ1tajvef5mulD6Rt8gvg-rE2W_Kfo5xg&s'
     ],
     3 => [
         'title' => 'Cozy Cottage in the Countryside',
@@ -34,9 +37,10 @@ $properties = [
         'type' => 'Cozy',
         'facilities' => ['Wifi', 'Garden', 'Parking'],
         'created_at' => '10 Maret 2023',
-        'image' => 'https://via.placeholder.com/750x500.png?text=Cozy+Cottage+in+the+Countryside'
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRwr8StTfmSgT3VGToLR5GJ6NzAQVlqxEA6A&s'
     ],
 ];
+
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $property = isset($properties[$id]) ? $properties[$id] : null;
@@ -58,8 +62,9 @@ if (!$property) {
     <link rel="stylesheet" href="css/style.css">
     <style>
         .property-image {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .property-detail {
             margin-top: 20px;

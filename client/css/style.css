@@ -1,0 +1,30 @@
+.property-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.property-detail {
+  margin-top: 20px;
+}
+
+.property-category {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.property-facilities {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.property-facilities li {
+  background: #f8f9fa;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.contact-btn {
+  margin-top: 20px;
+}

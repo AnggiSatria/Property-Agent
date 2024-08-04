@@ -76,3 +76,12 @@ array (
   'token' => '1e12edd692b455e3cab336b2328c58d8',
   'refreshToken' => '1bfa317011a6dd81f408b1244cffec4b4d4b0a374bbb85f75df72d067fe91c3e',
 )
+Before execute
+Params: ["66a4757d57b306.87484021","user 1","user","1","user1@mail.com","089632144231","$2y$10$sjVObtsSmrWIK6zpKQVtme5o.WohaKscsRNwUdouSsv8DIitWfCV2","","http:\/\/localhost\/uploads\/YFheWm.jpg","users","359de0c15944bf793793f790083d7515","3ed93e899a7dbb4ac993d3cc78b499dbd120a5502af524377bab5862664a115f"]
+Execute result: true
+Stmt error: 
+array (
+  'insert_id' => 0,
+  'token' => '359de0c15944bf793793f790083d7515',
+  'refreshToken' => '3ed93e899a7dbb4ac993d3cc78b499dbd120a5502af524377bab5862664a115f',
+)

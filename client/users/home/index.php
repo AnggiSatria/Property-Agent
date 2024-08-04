@@ -5,21 +5,21 @@ $properties = [
         'title' => 'Luxury Villa in Bali',
         'description' => 'A beautiful villa located in the heart of Bali.',
         'price' => 1500000,
-        'image' => 'https://via.placeholder.com/400x300.png?text=Luxury+Villa+in+Bali'
+        'image' => 'https://cdn.rri.co.id/berita/Pusat_Pemberitaan/o/1710573699251-IMG_20240316_135220/f5zoa747c2q8lwc.jpeg'
     ],
     [
         'id' => 2,
         'title' => 'Modern Apartment in New York',
         'description' => 'A modern apartment in downtown New York.',
         'price' => 2000000,
-        'image' => 'https://via.placeholder.com/400x300.png?text=Modern+Apartment+in+New+York'
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4ilQ1tajvef5mulD6Rt8gvg-rE2W_Kfo5xg&s'
     ],
     [
         'id' => 3,
         'title' => 'Cozy Cottage in the Countryside',
         'description' => 'A cozy cottage perfect for a peaceful retreat.',
         'price' => 500000,
-        'image' => 'https://via.placeholder.com/400x300.png?text=Cozy+Cottage+in+the+Countryside'
+        'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRwr8StTfmSgT3VGToLR5GJ6NzAQVlqxEA6A&s'
     ],
 ];
 ?>
@@ -33,7 +33,12 @@ $properties = [
     <link rel="icon" href="/assets/CARIKOST.COM.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+
+
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -42,8 +47,8 @@ $properties = [
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav mx-auto justify-content-between">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Home</a>
                     </li>
@@ -56,7 +61,7 @@ $properties = [
                 </ul>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://randomuser.me/api/portraits/thumb/women/55.jpg" alt="Logo" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                        <img src="https://randomuser.me/api/portraits/thumb/women/55.jpg" alt="Logo" class="rounded-circle" style="width: 40px; height: 40px !important; object-fit: cover;">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/">Logout</a></li>
